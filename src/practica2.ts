@@ -79,7 +79,7 @@ app.patch('/movies/:id', (req:Request, res:Response) => {
     return res.json(actualizarMovie)
 })
 
-const PORT = process.env.PORT ?? 2712;
+const PORT = Number(process.env.PORT) || 2712;
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en: http://localhost:${PORT}`);

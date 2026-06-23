@@ -5,7 +5,9 @@
   "main": "practica2.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec ts-node src/practica2.ts"
+    "dev": "nodemon --exec ts-node src/practica2.ts",
+    "build": "tsc",
+    "start": "node dist/practica2.js"
   },
   "keywords": [],
   "author": "",
