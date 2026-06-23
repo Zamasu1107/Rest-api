@@ -3,7 +3,7 @@ import type { Request, Response } from 'express';
 const express = require('express');
 const crypto = require('node:crypto');
 const movies = require('../movies.json');
-const { validarMovie, cambiarMovie } = require('../esquemas/esquema')
+const { validarMovie, cambiarMovie } = require('./esquemas/esquema')
 
 const app = express();
 app.use(express.json());
