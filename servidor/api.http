@@ -2,10 +2,10 @@
 GET http://localhost:2712/movies
 
 ### Por id
-GET http://localhost:2712/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+GET http://localhost:2712/movies/21272801-7121-11f1-86e9-a0ad9f862f68
 
 ### Por genero
-GET http://localhost:2712/movies?genre=action
+GET http://localhost:2712/movies?genre=DRAMA
 
 ### Crear una peli
 POST http://localhost:2712/movies
@@ -33,3 +33,6 @@ Content-Type: application/json
     "director": "Gore Verbinski",
     "year": 2008
 }
+
+### borrar pelicula
+delete http://localhost:2712/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
