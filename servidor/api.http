@@ -2,7 +2,7 @@
 GET http://localhost:2712/movies
 
 ### Por id
-GET http://localhost:2712/movies/21272801-7121-11f1-86e9-a0ad9f862f68
+GET http://localhost:2712/movies/8b405473-71e2-11f1-86e9-a0ad9f862f68
 
 ### Por genero
 GET http://localhost:2712/movies?genre=DRAMA
@@ -12,17 +12,17 @@ POST http://localhost:2712/movies
 Content-Type: application/json
 
 {
-    "title": "Piratas del Caribe 3",
-    "year": 2008,
-    "director": "Gore Jackson",
-    "duration": 186,
-    "poster": "https://i.ebayimg.com/images/g/0hoAAOSwe7peaMLW/s-l1600.jpg",
-    "genre": [
+   "title":"Piratas del Caribe 3",
+   "year":2008,
+   "director":"Gore Jackson",
+   "duration":186,
+   "poster":"https://i.ebayimg.com/images/g/0hoAAOSwe7peaMLW/s-l1600.jpg",
+   "genre":[
       "Action",
       "Adventure",
       "Drama"
-    ],
-    "rate": 10
+   ],
+   "rate":9.2
 }
 
 ### Actualizar una peli
@@ -35,4 +35,4 @@ Content-Type: application/json
 }
 
 ### borrar pelicula
-delete http://localhost:2712/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+delete http://localhost:2712/movies/7d90f614-71de-11f1-86e9-a0ad9f862f68

@@ -2,18 +2,19 @@
   "name": "practica-node",
   "version": "1.0.0",
   "description": "",
-  "main": "practica2.ts",
+  "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/practica2.ts",
+    "dev": "tsx watch src/app.ts",
     "build": "tsc",
-    "start": "node dist/practica2.js"
+    "start": "node dist/app.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "5.0.6",
     "@types/node": "25.9.3",
     "tsx": "^4.22.4",
