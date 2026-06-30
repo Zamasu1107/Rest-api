@@ -10,10 +10,10 @@ const blueprintMovie = zod.object({
         rate: zod.number().positive().min(0).max(10)
     })
 
-    export function validarMovie(object:any) {
+    export function validarMovie(object:object) {
     return blueprintMovie.safeParse(object);
 }
 
-export function cambiarMovie(object:any) {
+export function cambiarMovie(object:object) {
     return blueprintMovie.partial().safeParse(object)
 }

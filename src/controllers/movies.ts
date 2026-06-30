@@ -6,6 +6,7 @@ export class MovieController {
     constructor ({ movieModel }: { movieModel: any }) {
         this.movieModel = movieModel
     }
+    
     getAll = async (req:Request, res:Response) => {
         const { genre } = req.query;
             const movies = await this.movieModel.getAll({ genre })
@@ -15,7 +16,7 @@ export class MovieController {
     getById = async (req:Request, res:Response) => {
         const { id } = req.params;
             if(typeof id === 'string') {
-            const movie:any = await this.movieModel.getById({ id })
+            const movie = await this.movieModel.getById({ id })
             if (movie) return res.json(movie)
 
             res.status(404).json({ message: 'Movie not found' })

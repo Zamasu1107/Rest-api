@@ -1,4 +1,4 @@
-import console from "node:console";
+import console, { log } from "node:console";
 import type { Request, Response } from 'express';
 import express from 'express';
 import { createMovieRouter } from "./routes/movies.js";
@@ -14,7 +14,7 @@ app.get('/', (req:Request, res:Response) => {
     res.send('<h1>Hola Amo Andrik como van sus practicas?</h1>');
 })
 
-app.use('/movies', createMovieRouter({ movieModel: MovieModel}))
+app.use('/movies', createMovieRouter({ movieModel: MovieModel }))
 
 const PORT = Number(process.env.PORT) || 2712; //https://rest-api-xi33.onrender.com/
 

@@ -21,13 +21,21 @@ interface Movie {
     rate?: number;
 }
 
+interface updatedMovie {
+    title?: string;
+    year?: number;
+    director?: string;
+    duration?: number;
+    poster?:  string;
+    rate?: number;
+}
+
 interface UUIDRow extends RowDataPacket {
   uuid: string;
 }
 
 export class MovieModel {
-    static async getAll ({ genre }: { genre: any }) {
-        
+    static async getAll ({ genre }: { genre?: any }) {
         if(genre) {
            const lowerCaseGenre = genre.toLowerCase() 
 
@@ -41,7 +49,6 @@ export class MovieModel {
 
         return genres;
     }
-        
         const [movies] = await connection.query(
             'SELECT title, year, director, duration, poster, rate, BIN_TO_UUID(id) from movie;'
         )
@@ -76,13 +83,23 @@ export class MovieModel {
 
         const { uuid } = uuidResult[0]!;
 
+        const [idGenre] = await connection.query<RowDataPacket[]>(`SELECT id FROM genre WHERE name IN (?);`, [genreInput]);
+        const ids = idGenre.map(item => item.id);
+
+        const values = ids.flatMap(genreId => [uuid, genreId]);
+        const placeHolders = ids.map(() => "(UUID_TO_BIN(?), ?)").join(', ')
+
        try {
         await connection.query(`INSERT INTO movie (id, title, year, director, duration, poster, rate) 
         VALUES (UUID_TO_BIN(?), ?, ?, ?, ?, ?, ?);`, [uuid, title, year, director, duration, poster, rate])
+
+        if(idGenre.length > 0) {
+        await connection.query(`INSERT INTO movie_genre (movie_id, genre_id) VALUES ${placeHolders};`, values);
+        }
        } catch (error) {
         console.log(error)
        }
-      
+
        const [movies] = await connection.query<RowDataPacket[]>(
             `SELECT title, year, director, duration, poster, rate, BIN_TO_UUID(id) id FROM movie WHERE id = UUID_TO_BIN(?);`, [uuid])
 
@@ -97,11 +114,10 @@ export class MovieModel {
         return deleteMovie.affectedRows > 0;
     }
 
-    static async update ({ id, input }: { id: string, input?:any }) {
-       const [movies] = await connection.query<ResultSetHeader>(
-            'SELECT title, year, director, duration, poster, rate, BIN_TO_UUID(id) from movie WHERE id = UUID_TO_BIN(?);', [id]
-        )
+    static async update ({ id, input }: { id: string, input:updatedMovie }) {
+    
+        const [updateMovie] = await connection.query<ResultSetHeader>(`UPDATE movie SET ? WHERE id = UUID_TO_BIN(?);`, [input, id])
 
-        
+        return updateMovie.affectedRows > 0;
     }
 }
